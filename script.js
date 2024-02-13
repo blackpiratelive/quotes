@@ -9,20 +9,32 @@ function generateQuoteAndColor() {
     // Set background color
     document.body.style.backgroundColor = randomColor;
 
-    // Fetch quotes from the text file
-    fetch('quotes.txt') // Change 'quotes.txt' to the path of your quotes file
+    // Set text color to black
+    document.body.style.color = '#000';
+
+    // Fetch the file containing paths to other quote files
+    fetch('quotes.txt')
         .then(response => response.text())
         .then(data => {
-            // Split the quotes by lines
-            const quotes = data.split('\n');
-            // Generate a random index
-            const randomIndex = Math.floor(Math.random() * quotes.length);
-            // Display the random quote
-            document.getElementById('quote').textContent = quotes[randomIndex];
+            // Split the file paths by lines
+            const paths = data.split('\n');
+            // Select a random file path
+            const randomPath = paths[Math.floor(Math.random() * paths.length)];
+            // Fetch quotes from the selected file
+            fetch(randomPath.trim()) // Trim any leading/trailing whitespace from the path
+                .then(response => response.text())
+                .then(data => {
+                    // Split the quotes by lines
+                    const quotes = data.split('\n');
+                    // Generate a random index
+                    const randomIndex = Math.floor(Math.random() * quotes.length);
+                    // Display the random quote
+                    document.getElementById('quote').textContent = quotes[randomIndex];
+                })
+                .catch(error => console.log(error));
         })
         .catch(error => console.log(error));
 }
 
 // Generate a quote and background color when the page loads
 generateQuoteAndColor();
-
