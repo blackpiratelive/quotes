@@ -33,7 +33,7 @@ function generateQuoteAndColor() {
                     // Format the file name
                     const formattedFileName = fileName.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
                     // Display the random quote and file name
-                    document.getElementById('quote').textContent = quotes[randomIndex] + " - From: " + formattedFileName;
+                    document.getElementById('quote').innerHTML = quotes[randomIndex] + "<br>From: <span style='text-align:left'>" + formattedFileName + "</span>";
                 })
                 .catch(error => console.log(error));
         })
