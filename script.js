@@ -28,8 +28,12 @@ function generateQuoteAndColor() {
                     const quotes = data.split('\n');
                     // Generate a random index
                     const randomIndex = Math.floor(Math.random() * quotes.length);
-                    // Display the random quote
-                    document.getElementById('quote').textContent = quotes[randomIndex];
+                    // Get the file name without extension
+                    const fileName = randomPath.split('/').pop().split('.').slice(0, -1).join('.');
+                    // Format the file name
+                    const formattedFileName = fileName.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+                    // Display the random quote and file name
+                    document.getElementById('quote').textContent = quotes[randomIndex] + " - From: " + formattedFileName;
                 })
                 .catch(error => console.log(error));
         })
