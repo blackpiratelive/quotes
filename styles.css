@@ -21,3 +21,7 @@ h1 {
     color: #000; /* Set text color to black */
 }
 
+h4 {
+    color: grey;
+    text-align: center;
+}
